@@ -1,68 +1,172 @@
 @import "tailwindcss";
 @import "../../vendor/livewire/flux/dist/flux.css";
 
-@source "../views";
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
-@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+:root {
+    --color-background: hsl(0 0% 97%);
+    --color-foreground: hsl(150 10% 12%);
 
-@custom-variant dark (&:where(.dark, .dark *));
-@plugin "flowbite/plugin";
-@theme {
-    --font-sans:
-        "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
+    --color-card: hsl(0 0% 100%);
+    --color-card-foreground: hsl(150 10% 12%);
 
-    --color-zinc-50: #fafafa;
-    --color-zinc-100: #f5f5f5;
-    --color-zinc-200: #e5e5e5;
-    --color-zinc-300: #d4d4d4;
-    --color-zinc-400: #a3a3a3;
-    --color-zinc-500: #737373;
-    --color-zinc-600: #525252;
-    --color-zinc-700: #404040;
-    --color-zinc-800: #262626;
-    --color-zinc-900: #171717;
-    --color-zinc-950: #0a0a0a;
+    --color-primary: hsl(152 60% 40%); /* verde */
+    --color-primary-hover: hsl(152, 58%, 34%);
+    --color-primary-foreground: hsl(0 0% 100%);
 
-    --color-accent: var(--color-neutral-800);
-    --color-accent-content: var(--color-neutral-800);
-    --color-accent-foreground: var(--color-white);
+    --color-secondary: hsl(150 8% 92%);
+    --color-secondary-foreground: hsl(150 10% 20%);
+
+    --color-muted: hsl(150 6% 94%);
+    --color-muted-foreground: hsl(150 5% 50%);
+
+    --color-accent: hsl(152 45% 94%);
+    --color-accent-foreground: hsl(152 60% 30%);
+
+    --color-border: hsl(150 8% 90%);
+
+    --color-btn-login: hsla(0, 1%, 75%, 0.697);
 }
 
-@layer theme {
-    .dark {
-        --color-accent: var(--color-white);
-        --color-accent-content: var(--color-white);
-        --color-accent-foreground: var(--color-neutral-800);
-    }
+.dark {
+    --color-background: hsl(220 20% 6%);
+    --color-foreground: hsl(210 20% 95%);
+
+    --color-card: hsl(220 20% 9%);
+    --color-card-foreground: hsl(210 20% 95%);
+
+    --color-primary: hsl(217 80% 56%); /* azul */
+    --color-primary-hover: hsl(217, 68%, 38%);
+    --color-primary-foreground: hsl(0 0% 100%);
+
+    --color-secondary: hsl(220 18% 14%);
+    --color-secondary-foreground: hsl(210 15% 85%);
+
+    --color-muted: hsl(220 15% 13%);
+    --color-muted-foreground: hsl(215 12% 55%);
+
+    --color-accent: hsl(217 60% 15%);
+    --color-accent-foreground: hsl(217 80% 70%);
+
+    --color-border: hsl(220 15% 16%);
 }
 
 @layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
+    body {
+        background-color: var(--color-background);
+        color: var(--color-foreground);
+        font-family: "Inter", sans-serif;
     }
 }
 
+@layer components {
+    /* 🔘 BOTONES BASE */
+    .btn {
+        @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200;
+    }
+
+    /* 🟢 PRIMARY */
+    .btn-primary {
+        background-color: var(--color-primary);
+        color: var(--color-primary-foreground);
+    }
+
+    .btn-primary:hover {
+        opacity: 0.9;
+    }
+
+    .btn-outline {
+        border: 1px solid var(--color-border);
+        color: var(--color-foreground);
+        background: transparent;
+    }
+
+    .btn-outline:hover {
+        background-color: var(--color-primary);
+        color: var(--color-primary-foreground);
+        border-color: var(--color-primary);
+    }
+
+    .btn-ghost {
+        background: transparent;
+        color: var(--color-foreground);
+    }
+
+    .btn-ghost:hover {
+        background-color: color-mix(
+            in oklab,
+            var(--color-primary) 5%,
+            transparent
+        );
+        color: var(--color-primary);
+    }
+
+    .btn-start {
+        background-color: var(--color-primary) !important;
+        color: var(--color-primary-foreground) !important;
+    }
+
+    .btn-start:hover {
+        background-color: var(--color-primary-hover) !important;
+    }
+
+    .btn-secondary {
+        background-color: var(--color-muted) !important;
+        color: var(--color-foreground) !important;
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--color-primary) !important;
+    }
+
+    .dark .btn-secondary {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    .dark .btn-secondary:hover {
+        background-color: #e5e5e5 !important;
+    }
+
+    .card {
+        background-color: var(--color-card);
+        color: var(--color-card-foreground);
+        border: 1px solid var(--color-border);
+        @apply rounded-xl p-4 shadow-sm;
+    }
+
+    .flux-primary-hover:hover {
+        background-color: var(--color-primary) !important;
+        color: var(--color-primary) !important;
+    }
+
+    .btn-login-hover {
+        background-color: var(--color-btn-login) !important;
+        color: white !important;
+    }
+
+    .dark .btn-login-hover {
+        background-color: var(--color-secondary) !important;
+        color: var(--color-foreground) !important;
+    }
+
+    .btn-login-hover:hover,
+    [data-flux-button].btn-login-hover:hover,
+    ui-button.btn-login-hover:hover {
+        background-color: color-mix(
+            in oklab,
+            var(--color-primary) 20%,
+            transparent
+        ) !important;
+        color: var(--color-primary) !important;
+        /* border-color: var(--color-primary) !important; */
+    }
+}
+
+/* Inputs Flux */
 [data-flux-field] {
     @apply grid gap-2;
 }
 
-[data-flux-label] {
-    @apply !mb-0 !leading-tight;
+/* Evitar fondo raro en hover */
+[data-flux-button]:hover {
+    transition: all 0.2s ease;
 }
-
-input:focus[data-flux-control],
-textarea:focus[data-flux-control],
-select:focus[data-flux-control] {
-    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
-}
-
-/* \[:where(&)\]:size-4 {
-    @apply size-4;
-} */

@@ -1,5 +1,5 @@
 @props([
-    'status=>null', 'error=>null'
+    'status'=>null, 'error'=>null
 ])
 
 @if ($status)
