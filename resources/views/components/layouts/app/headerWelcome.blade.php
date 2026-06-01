@@ -23,7 +23,7 @@
         <!-- NAV DESKTOP -->
         <flux:navbar class="ml-10 max-md:hidden me-2">
             @guest
-                <a href="{{ route('login') }}" wire:navigate class="!bg-gray-100 rounded-lg">
+                <a href="{{ route('login') }}" wire:navigate class="!bg-gray-300 rounded-lg">
                     <flux:button variant="filled"
                         class="transition-all !text-black !font-bold outline-black duration-200 btn-login-hover">
                         {{ __('home.login') }}
@@ -58,8 +58,8 @@
         </flux:navlist>
     </flux:sidebar>
 
-
-    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+    {{-- max-w-7xl px-4 sm:px-6 lg:px-8 --}}
+    <main class="mx-auto py-6">
         {{ $slot }}
     </main>
 
